@@ -69,13 +69,15 @@ function isOS() {
 // feedback system
 function feedback_system() {
   var user_name =  window.prompt("What's Your Name ? ");
-  var user_feed = window.prompt('How TapShare can be better, '+user_name);
+  if (user_name != null){
+    var user_feed = window.prompt('How TapShare can be better, '+user_name);
+  }
 
   if (user_name && user_feed != null) {
     firebase.database().ref('/tapsharedb/feedbacks/'+user_name).set({
       user_feed: user_feed
     });
-    window.alert(user_name + ', ' + user_feed);
+    window.alert("Thanks for your great help, "+user_name);
   }else {
     console.log('No Feedback ...');
   }
