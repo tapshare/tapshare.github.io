@@ -7,4 +7,5 @@ It's a Fast, Secure and Easy way to share all kinds of links Cross-platform
 - Fast and Secure link sharing experince
 - Cross-platform (IOS-Android-Desktop)
 - Smooth and Easy to use, only two clicks
+- Free to use and adfree
 </pre>
