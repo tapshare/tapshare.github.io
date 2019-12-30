@@ -1,5 +1,5 @@
 # TapShare
-It's a Fast, Secure and Easy way to share all kinds of links Cross-platform 
+It's a Fast, Secure and Easy way to share all kind of links Cross-platform 
 
 # TapShare Features 
 <pre>
