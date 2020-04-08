@@ -15,26 +15,35 @@ var firebaseConfig = {
 
 // getData function
 function getData() {
-  firebase.database().ref('tapsharedb/').once('value', function(snapshot){
-    snapshot.forEach(function(childsnapshot){
-      var childKey = childsnapshot.key;
-      var childData = childsnapshot.val();
-      var getLink = childData['link'];
-      document.getElementById('link_box').value = getLink;
-    })
+  fix_ui_Error();
+
+  var link_id = document.getElementById('link_id_box').value;
+
+  firebase.database().ref('/tapsharedb/' + link_id + '/').once('value').then(function (snapshot) {
+    var getLink = snapshot.val().user_link;
+
+    document.getElementById('link_box').value = getLink;
+    document.getElementById('link_box').disabled = true;
   })
 }
 
 // pushData function
 function pushData() {
+  fix_ui_Error();
+  codeGenrator();
+
   if (document.getElementById('link_box').value != "") {
 
-    firebase.database().ref('/tapsharedb/taplink/').set({
-      link: document.getElementById('link_box').value
+    firebase.database().ref('/tapsharedb/' + user_rand_code + '/').set({
+      user_link: document.getElementById('link_box').value
     })
 
     window.alert("TapShared Successfully ❤️");
     document.getElementById('link_box').value = "";
+
+    document.getElementById('link_id_box').value = space_error + user_rand_code;
+    document.getElementById('link_id_box').disabled = true;
+
 
   }else {
     window.alert("Link is required !!")
@@ -48,8 +57,17 @@ function openLink() {
   }else {
     //window.alert('Click again when you link apper to open it.');
     console.log("Link Not Found !!");
-    feedback_system();
+    //feedback_system();
   }
+}
+
+function codeGenrator() {
+  user_rand_code = Math.random().toString(36).substring(2, 4) + Math.random().toString(36).substring(2, 4);
+}
+
+function fix_ui_Error() {
+  space_error = "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0"
+  link_space_error = "\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0"
 }
 
 // copy link function [ Upgrade ]
